@@ -1,0 +1,6 @@
+{
+  "verbose": true,
+  "ignore": ["*.test.js"],
+  "watch": "./**/*.js",
+  "exec": "node index.js"
+}
