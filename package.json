@@ -1,5 +1,5 @@
 {
-  "name": "full-stack-exercise",
+  "name": "full-stack-challenge",
   "version": "1.0.0",
   "description": "A little exercise using a Star Wars API [https://swapi.dev/](https://swapi.dev/), [express.js](https://expressjs.com/) and [React](https://reactjs.org/)",
   "main": "index.js",
