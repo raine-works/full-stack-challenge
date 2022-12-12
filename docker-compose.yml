@@ -1,14 +1,27 @@
-version: '3'
+version: '3.9'
+
 services:
   api:
-    build: ./server
-    # env_file: /* Optional, if you want/need a dotenv file */
-    #   - .env
+    build: 
+      context: ./apps/server
+      dockerfile: .docker/Dockerfile
     environment:
       - PORT=4000
     ports:
       - '4000:4000'
       - '9229:9229'
+    expose:
+      - '4000:4000'
+      - '9229:9229'
     volumes:
       - .:/usr/src/app:cached
     command: ['npm', 'run', 'server:dev']
+
+  client: 
+    build: 
+      context: ./apps/client
+      dockerfile: .docker/Dockerfile
+    ports:
+      - '80:80'
+    expose: 
+      - '80'

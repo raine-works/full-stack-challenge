@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 function App() {
   const [searchByPlanets, setSearchByPlanets] = useState(false);
@@ -11,6 +13,7 @@ function App() {
   const toggleSearchBy = () => {
     setSearchByPlanets(!searchByPlanets);
     setRecordObj(searchByPlanets ? people : planets);
+    setSelectedItem(null);
   };
 
   const getData = async (key: string) => {
@@ -33,7 +36,7 @@ function App() {
 
   return (
     <div className="h-screen flex justify-center items-center p-24">
-      <div className="p-6 bg-gray-200 rounded-lg w-full">
+      <div className="p-6 bg-gray-200 rounded-lg w-full max-w-4xl">
         <div>
           <h1 className="text-4xl mb-6">Star Wars API</h1>
         </div>
@@ -78,7 +81,7 @@ function App() {
 
         <div className="flex">
           {/** List view */}
-          <div className="h-80 w-[60%] bg-white p-2 rounded-lg mr-6">
+          <div className="h-80 w-[60%] bg-white p-2 rounded-lg mr-6 relative">
             <h2 className="text-2xl pl-2">
               List / {searchByPlanets ? "Planets" : "People"}
             </h2>
@@ -98,7 +101,7 @@ function App() {
                       }}
                       key={index}
                       className={`flex justify-between px-4 py-2 mr-2 cursor-pointer rounded-lg ${
-                        selectedItem.name === item.name
+                        selectedItem?.name === item.name
                           ? "bg-gray-100"
                           : "bg-white"
                       }`}
@@ -110,6 +113,12 @@ function App() {
                 })}
               </ul>
             </div>
+            {recordObj.length === 0 && (
+              <img
+                src="https://i.pinimg.com/236x/36/1f/01/361f0121332de3d36c152261e4d92fdb.jpg"
+                className="h-20 absolute bottom-1 left-1"
+              />
+            )}
           </div>
 
           {/** Info */}
@@ -121,24 +130,62 @@ function App() {
                 <p>{selectedItem?.name}</p>
               </li>
               <li className="flex justify-between">
-                <h2 className="mr-6 font-bold">Height:</h2>
-                <p>{selectedItem?.height}</p>
+                <h2 className="mr-6 font-bold">
+                  {searchByPlanets ? "Population" : "Height"}:
+                </h2>
+                <p>
+                  {searchByPlanets
+                    ? selectedItem?.population
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                    : selectedItem?.height}
+                </p>
               </li>
               <li className="flex justify-between">
-                <h2 className="mr-6 font-bold">Weight:</h2>
-                <p>{selectedItem?.mass}</p>
+                <h2 className="mr-6 font-bold">
+                  {searchByPlanets ? "Terrain" : "Weight"}:
+                </h2>
+                <p>
+                  {searchByPlanets ? selectedItem?.terrain : selectedItem?.mass}
+                </p>
               </li>
               <li className="flex justify-between">
-                <h2 className="mr-6 font-bold">Birth Year:</h2>
-                <p>{selectedItem?.birth_year}</p>
+                <h2 className="mr-6 font-bold">
+                  {searchByPlanets ? "Climate" : "Birth Year"}:
+                </h2>
+                <p>
+                  {searchByPlanets
+                    ? selectedItem?.climate
+                    : selectedItem?.birth_year}
+                </p>
               </li>
               <li className="flex justify-between">
-                <h2 className="mr-6 font-bold">Eye Color:</h2>
-                <p>{selectedItem?.eye_color}</p>
+                <h2 className="mr-6 font-bold">
+                  {searchByPlanets ? "Gravity" : "Eye Color"}:
+                </h2>
+                <p>
+                  {searchByPlanets
+                    ? selectedItem?.gravity
+                    : selectedItem?.eye_color}
+                </p>
               </li>
             </ol>
           </div>
         </div>
+      </div>
+
+      <div className="fixed bottom-2">
+        <p className="text-xl flex items-center">
+          <FontAwesomeIcon icon={faGithub} className="text-slate-900 mr-2" />
+          raineworks -
+          <a
+            className="ml-1"
+            href="https://github.com/raine-works/full-stack-challenge"
+            target="_blank"
+          >
+            source code
+          </a>
+        </p>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@
     "server:dev": "npm run dev --prefix apps/server",
     "client:dev": "npm run dev --prefix apps/client",
     "docker:build": "docker-compose build",
-    "internal": "npm run docker:build && docker-compose up & npm run client:dev"
+    "internal": "npm run docker:build && docker-compose up"
   },
   "workspaces": [
     "apps/*"
