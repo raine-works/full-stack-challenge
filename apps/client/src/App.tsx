@@ -34,6 +34,8 @@ function App() {
     setRecordObj(data);
   };
 
+  document.title = "Star Wars API";
+
   return (
     <div className="h-screen flex justify-center items-center p-24">
       <div className="p-6 bg-gray-200 rounded-lg w-full max-w-4xl">
